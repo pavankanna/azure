@@ -1,0 +1,39 @@
+{
+  "builders": [{
+    "type": "azure-arm",
+    
+    "client_id": "8b50f11f-48cb-4ce9-b529-777dc6439724",
+    "client_secret": "c05a052e-061d-44f6-b7a5-cdb2e2b7a59f",
+    "tenant_id": "f2fd9a6b-cbbe-4167-bd83-5f6562d859c3", 
+    "subscription_id": "7c7a5e2c-b1d4-4225-a098-612bb588bc94",
+    "object_id": "36e37842-5237-47b9-bd87-185f965e119b",
+
+ "managed_image_resource_group_name": "tEstResourceGroupVM",
+    "managed_image_name": "myPackerImage",
+
+    "os_type": "Linux",
+    "image_publisher": "OpenLogic",
+    "image_offer": "CentOS",
+    "image_sku": "7.3",
+
+    "azure_tags": {
+        "dept": "Engineering",
+        "task": "Image deployment"
+    },
+
+    "location": "East US",
+    "vm_size": "Standard_DS2_v2"
+  }],
+  "provisioners": [{
+    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+    "inline": [
+      "yum update",
+      "yum upgrade -y",
+      "yum -y install nginx",
+
+      "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+    ],
+    "inline_shebang": "/bin/sh -x",
+    "type": "shell"
+  }]
+}
