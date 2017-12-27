@@ -9,7 +9,7 @@
     "object_id": "36e37842-5237-47b9-bd87-185f965e119b",
 
  "managed_image_resource_group_name": "tEstResourceGroupVM",
-    "managed_image_name": "myPackerImage",
+    "managed_image_name": "AzureVMCreation-Jenkins",
 
     "os_type": "Linux",
     "image_publisher": "OpenLogic",
